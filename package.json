@@ -1,0 +1,75 @@
+{
+  "name": "@flowtr/slab-chat-backend",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./": "./dist/index.js"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+    }
+  },
+  "scripts": {
+    "cm": "cz",
+    "build": "tsc -b",
+    "start": "ts-node --esm ./src/main.ts",
+    "dev": "nodemon",
+    "test": "ava --fail-fast -v",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "pnpm run lint -- --fix",
+    "prettier": "prettier src && prettier test",
+    "prettier:fix": "prettier --write src && prettier --write test",
+    "coverage": "c8 ava",
+    "prepublishOnly": "pinst --disable && pnpm run lint && pnpm run test && pnpm run build",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable"
+  },
+  "keywords": [
+    "typescript",
+    "node"
+  ],
+  "author": "Theo Paris",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "16.2.3",
+    "@commitlint/config-conventional": "16.2.1",
+    "@theoparis/eslint-config": "github:creepinson/eslint-config#update",
+    "@types/node": "17.0.23",
+    "ava": "^4.1.0",
+    "axios": "^0.26.1",
+    "axios-test-instance": "^5.0.0",
+    "c8": "^7.11.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "8.11.0",
+    "husky": "7.0.4",
+    "nodemon": "^2.0.15",
+    "pinst": "^3.0.0",
+    "prettier": "2.6.1",
+    "ts-node": "^10.7.0",
+    "typescript": "4.6.3"
+  },
+  "dependencies": {
+    "@tinyhttp/app": "^2.0.19",
+    "@tinyhttp/cors": "^2.0.0",
+    "dotenv": "^16.0.0",
+    "hash-wasm": "^4.9.0",
+    "http-json-errors": "^1.2.12",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^1.0.4",
+    "milliparsec": "^2.2.1",
+    "pg": "^8.7.3",
+    "tslog": "^3.3.3",
+    "zod": "^3.14.2"
+  }
+}

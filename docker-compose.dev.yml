@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:alpine
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: slabchat
+      POSTGRES_PASSWORD: secret
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    ports:
+      - 8088:8080
+

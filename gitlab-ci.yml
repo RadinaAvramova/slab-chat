@@ -1,0 +1,36 @@
+image: docker.io/node:current-alpine
+
+services:
+  - postgres:alpine
+
+variables:
+  POSTGRES_DB: slabchat
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: secret
+
+before_script:
+  - npm i -g npm pnpm
+  - pnpm install
+
+stages:
+  - build
+  - lint
+  - test
+
+build:
+  stage: build
+  script:
+    - pnpm run build
+
+lint:
+  stage: lint
+  script:
+    - pnpm run lint
+
+test:
+  stage: test
+  variables:
+    DB_URI: postgres://postgres:secret@postgres/slabchat
+    JWT_SECRET: 1234abc56789xyz
+  script:
+    - pnpm run coverage

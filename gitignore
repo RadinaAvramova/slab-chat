@@ -1,0 +1,20 @@
+# Distribution
+dist
+out
+build
+node_modules
+coverage
+
+# Logs
+*.log*
+
+# Environment
+*.env*
+data/
+
+# Misc
+.DS_Store
+.dccache
+
+# IDE Settings
+.vscode/sftp.json
